@@ -1,7 +1,7 @@
 /*
  * Name: Nikhil Ranjan Nayak
  * Regd No: 1641012040
- * Desc: Bubble Sort
+ * Desc: High Array App
  */
 package ProgrammingProjects;
 import java.lang.Math;
