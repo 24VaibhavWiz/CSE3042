@@ -5,27 +5,11 @@
  */
 package ProgrammingProjects;
 
-import java.util.Scanner;
-
 public class Prog2 {
 
 	public static void main(String args[]) {
-		int max, temp;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("\nEnter max - ");
-		//max = sc.nextInt();
-		max = 6;
-
+		int max = 6;
 		ArrayInsertion arrayInsertion = new ArrayInsertion(max);
-
-		/*
-		System.out.println("\nEnter values");
-		for(int i = 0; i < max; i++) {
-			System.out.println("\nEnter value for pos " + i);
-			temp = sc.nextInt();
-			arrayInsertion.insert(temp);
-		}
-		 */
 
 		arrayInsertion.insert(7);
 		arrayInsertion.insert(10);

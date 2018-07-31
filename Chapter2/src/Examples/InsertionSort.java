@@ -3,72 +3,62 @@
  * Regd No: 1641012040
  * Desc: Insertion Sort
  */
-package ProgrammingProjects;
+package Examples;
+import java.util.Scanner;
 
-public class ArrayInsertion {
+public class InsertionSort {
+
+	public static void main(String args[]) {
+		int max, temp;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\nEnter max - ");
+		max = sc.nextInt();
+		
+		ArrayInsertion arrayInsertion = new ArrayInsertion(max);
+		
+		System.out.println("\nEnter values");
+		for(int i = 0; i < max; i++) {
+			System.out.println("\nEnter value for pos " + i);
+			temp = sc.nextInt();
+			arrayInsertion.insert(temp);
+		}
+		
+		arrayInsertion.display();
+		arrayInsertion.doInsertionSort();
+		arrayInsertion.display();
+	}
+}
+
+class ArrayInsertion {
 
 	private int[] A;
 	private int total;
-	private boolean sorted = false;
-
+	
 	public ArrayInsertion(int max) {
 		A = new int[max];
 		total = 0;
 	}
-
+	
 	public void insert(int val) {
 		A[total] = val;
 		total++;
 	}
-
+	
 	public void display() {
 		for(int i = 0; i < total; i++) {
 			System.out.print(A[i] + " ");
 		}
 		System.out.println("");
 	}
-
+	
 	public void swap(int one, int two) {
 		int temp = A[one];
 		A[one] = A[two];
 		A[two] = temp;
 	}
-
-	public int median() {
-		int medianValue;
-
-		if(!sorted) {
-			doInsertionSort();
-		}
-
-		if(total % 2 == 0) {
-			medianValue = (A[total / 2 - 1] + A[(total / 2) + 1 - 1]) / 2;
-		} else {
-			medianValue = A[(total + 1) / 2 - 1];
-		}
-
-		return medianValue;
-	}
-
-	public void noDups() {
-		int totalTemp = total;
-		int shiftAmount = 0;
-		int curNum = 0;
-		for(int index = 0; index < totalTemp; index++) {
-			if(A[index] == curNum) {
-				shiftAmount++;
-				total--;
-			}
-			else {
-				curNum = A[index];
-				A[index - shiftAmount] = A[index];
-			}
-		}
-	}
-
+	
 	public void doInsertionSort() {
 		int in, out;
-		sorted = true;
 		for(out = 1; out < total; out++) {
 			int temp = A[out];
 			in = out;

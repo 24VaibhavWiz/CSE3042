@@ -3,9 +3,33 @@
  * Regd No: 1641012040
  * Desc: Selection Sort
  */
-package ProgrammingProjects;
+package Examples;
+import java.util.Scanner;
 
-public class ArraySelection {
+public class SelectionSort {
+
+	public static void main(String args[]) {
+		int max, temp;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\nEnter max - ");
+		max = sc.nextInt();
+		
+		ArraySelection arraySelection = new ArraySelection(max);
+		
+		System.out.println("\nEnter values");
+		for(int i = 0; i < max; i++) {
+			System.out.println("\nEnter value for pos " + i);
+			temp = sc.nextInt();
+			arraySelection.insert(temp);
+		}
+		
+		arraySelection.display();
+		arraySelection.doSelectionSort();
+		arraySelection.display();
+	}
+}
+
+class ArraySelection {
 
 	private int[] A;
 	private int total;
