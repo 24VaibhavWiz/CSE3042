@@ -51,11 +51,58 @@ public class ArrayInsertion {
 		return medianValue;
 	}
 	
-	public void noDups() {
-		if(!sorted) {
-			doInsertionSort();
+	public void insertionSortNoDups()
+	{
+		int in, out;
+		int numDups = 0;
+		for(out = 1; out < nElems; out++)
+		{
+			long temp = a[out];
+			in = out;
+			while(in > 0 && a[in-1] >= temp)
+			{
+				if(a[in-1] == temp && temp > -1) 
+				{
+					temp = -1;
+					numDups++;
+				}	
+				a[in] = a[in-1];
+				in--;
+			}
+			a[in] = temp;
 		}
-		// TODO : remove duplicates code
+		System.out.println(numDups);
+		display();
+		int totalElems = nElems - numDups;
+		for(int i = 0; i < totalElems; i++)
+		{
+			a[i] = a[i+numDups];
+		}
+		nElems -= numDups;
+		display();
+		
+	}
+	
+	public void noDups()
+	{
+		insertionSort();
+		
+		int total = nElems;
+		int shiftAmount = 0;
+		long curNum = 0;
+		for(int index = 0; index < total; index++)
+		{
+			if(a[index] == curNum)
+			{
+				shiftAmount++;
+				nElems--;
+			}
+			else
+			{
+				curNum = a[index];
+				a[index-shiftAmount] = a[index];
+			}
+		}
 	}
 
 	public void doInsertionSort() {
