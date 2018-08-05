@@ -33,7 +33,31 @@ public class ArrayBubble {
 		A[two] = temp;
 	}
 
+	public void oddEvenSort() {
+		int out, in;
+		int i;
+		int nInPasses = total / 2;
+		for (out = total - 1; out > 1; out--) {
+			for (i = 0; i < nInPasses; i++) {
+				for (in = 0; in < out; in += 2) // even loop
+					if (A[in] > A[in + 1])
+						swap(in, in + 1);
+				for (in = 1; in < out; in += 2) // odd loop
+					if (A[in] > A[ in +1])
+						swap( in , in +1);
+			}
+		}
+	}
+
 	public void doBubbleSort() {
+		int out, in;
+		for(out = total - 1; out > 1; out--)
+			for(in = 0; in < out; in++)
+				if(A[in] > A[in+1])
+					swap(in, in+1);
+	}
+
+	public void doBidirectionalBubbleSortTest() {
 		int out, in, ctr = 1;
 		for(out = total - 1; out >= 1; out--) {
 			for(in = 0; in < out; in++) {
@@ -52,6 +76,24 @@ public class ArrayBubble {
 					ctr++;
 				}
 			}
+		}
+	}
+
+	public void doBidirectionalBubbleSort() {
+		int outBottom, outTop, in;
+		outBottom = 0;
+		outTop = total - 1;
+		while(outBottom < outTop) {
+			for(in = outBottom; in < outTop; in++) {
+				if(A[in] > A[in + 1])
+					swap(in, in+1);
+			}
+			outTop--;
+			for(in = outTop; in > outBottom; in--) {
+				if(A[in - 1] > A[in])
+					swap(in, in-1);
+			}
+			outBottom++;
 		}
 	}
 }
