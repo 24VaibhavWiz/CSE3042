@@ -9,37 +9,40 @@ public class OrderedArray {
 
 	public static void main(String[] args) {
 		int maxSize = 100;
-		OrdArray arr = new OrdArray(maxSize);
-		
-		arr.insert(77);
-		arr.insert(99);
-		arr.insert(44);
-		arr.insert(55);
-		arr.insert(22);
-		arr.insert(88);
-		arr.insert(11);
-		arr.insert(00);
-		arr.insert(66);
-		arr.insert(33);
-		
-		int searchKey = 55;
+		OrdArray arrA = new OrdArray(maxSize);
+		OrdArray arrB = new OrdArray(maxSize);
 
-		if( arr.find(searchKey) != arr.size())
-			System.out.println("Found " + searchKey);
-		else
-			System.out.println("Can’t find " + searchKey);
-		
-		arr.display();
-		arr.delete(00);
-		arr.delete(55);
-		arr.delete(99);
-		arr.display();
+		arrA.insert(77);
+		arrA.insert(99);
+		arrA.insert(44);
+		arrA.insert(55);
+		arrA.insert(22);
+		arrA.insert(88);
+		arrA.insert(11);
+		arrA.insert(00);
+		arrA.insert(66);
+		arrA.insert(33);
+
+		arrB.insert(23);
+		arrB.insert(67);
+		arrB.insert(230);
+		arrB.insert(7745);
+		arrB.insert(222);
+		arrB.insert(8100);
+
+		System.out.println("\nArray 1 - ");
+		arrA.display();
+		System.out.println("\nArray 2 - ");
+		arrB.display();
+
+		OrdArray arrC = OrdArray.merge(arrA, arrB);
+		System.out.println("\nArray 3 - ");
+		arrC.display();
 	}
 
 }
 
-class OrdArray
-{
+class OrdArray {
 	private long[] a;
 	private int nElems;
 
@@ -50,6 +53,14 @@ class OrdArray
 
 	public int size() { 
 		return nElems; 
+	}
+
+	public long getValueAtPos(int index) {
+		return a[index];
+	}
+
+	public void setValueAtPos(int index, long value) {
+		a[index] = value;
 	}
 
 	public int find(long searchKey) {
@@ -92,6 +103,39 @@ class OrdArray
 			nElems--;
 			return true;
 		}
+	}
+
+	public static OrdArray merge(OrdArray arrayA, OrdArray arrayB) {
+		int length = arrayA.size() + arrayB.size();
+		OrdArray arrayC = new OrdArray(length * 2);
+		int i = 0, j = 0, k = 0;
+
+		while(j < arrayA.size() && k < arrayB.size()) {
+			if(arrayA.getValueAtPos(j) <= arrayB.getValueAtPos(k)) {
+				arrayC.setValueAtPos(i, arrayA.getValueAtPos(j));
+				j++;
+			} else {
+				arrayC.setValueAtPos(i, arrayB.getValueAtPos(k));
+				k++;
+			}
+			arrayC.nElems++;
+			i++;
+		}
+
+		while(j < arrayA.size()) {
+			arrayC.setValueAtPos(i, arrayA.getValueAtPos(j));
+			arrayC.nElems++;
+			i++;
+			j++;
+		}
+
+		while(k < arrayB.size()) {
+			arrayC.setValueAtPos(i, arrayB.getValueAtPos(k));
+			arrayC.nElems++;
+			i++;
+			k++;
+		}
+		return arrayC;
 	}
 
 	public void display() {
